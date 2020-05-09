@@ -1,5 +1,23 @@
-<html>
+<html lang="en">
 <body>
-<div>{{some}}</div>
+    <div>
+        <form method="post">
+            <label>
+                <input type="text" name="text" placeholder="Enter your message..." />
+            </label>
+            <label>
+                <input type="text" name="tag" placeholder="Message's tag" />
+            </label>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <div>Messages</div>
+    {{#messages}}
+        <div>
+            <b>{{id}}</b>
+            <span>{{text}}</span>
+            <i>{{tag}}</i>
+        </div>
+    {{/messages}}
 </body>
 </html>
