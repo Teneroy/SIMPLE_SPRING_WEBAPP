@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,6 +9,11 @@
 </head>
 <body>
     <main class="container">
+        <h1></h1>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="{{ _csrf.token}}" />
+            <input class="btn btn-outline-danger" type="submit" value="Sing Out">
+        </form>
         <h2>Messages</h2>
         <form method="post">
             <div class="form-group">
@@ -18,15 +24,17 @@
                 <label for="tagInput">Message's tag</label>
                 <input type="text" name="tag" class="form-control" id="tagInput" placeholder="Enter your tag...">
             </div>
+            <input type="hidden" name="_csrf" value="{{ _csrf.token}}" />
             <button class="btn btn-primary" type="submit">Send</button>
         </form>
         <h2>Filter</h2>
         <form method="post" action="filter">
             <div class="form-group">
-                <label for="filterInput">Search</label>
+                <label for="filterInput">Search tag name</label>
                 <input type="text" name="filter" class="form-control" id="filterInput" placeholder="Enter your search request...">
             </div>
-            <button class="btn btn-primary" type="submit">Найти</button>
+            <input type="hidden" name="_csrf" value="{{ _csrf.token}}" />
+            <button class="btn btn-primary" type="submit">Find</button>
         </form>
         <h2>Messages</h2>
         {{#messages}}
