@@ -24,6 +24,11 @@ public class MainController {
         return "greeting";
     }
 
+    @GetMapping("/error")
+    public String error(Map<String, Object> model) {
+        return "error";
+    }
+
     @GetMapping("/main")
     public String main(Map<String, Object> model) {
         Iterable<Message> messages = messageRepo.findAll();
