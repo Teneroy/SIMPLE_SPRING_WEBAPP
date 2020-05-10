@@ -19,12 +19,11 @@
         </section>
         <section class="row">
             <h2></h2>
-            <form method="post" action="filter">
+            <form method="get" action="/main">
                 <div class="form-group row">
                     <input type="text" name="filter" class="form-control  col s11" id="filterInput" placeholder="Enter your search request...">
                     <button class="waves-effect waves-light btn col s1" type="submit"><i class="material-icons">search</i></button>
                 </div>
-                <input type="hidden" name="_csrf" value="${ _csrf.token}" />
             </form>
         </section>
         <section class="row">
