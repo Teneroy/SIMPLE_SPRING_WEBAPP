@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.domain.Message;
+import org.example.domain.Role;
 import org.example.domain.User;
 import org.example.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +31,24 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+    public String main(@AuthenticationPrincipal User user, @RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Message> messages = (filter.isEmpty() ? messageRepo.findAll() : messageRepo.findByTag(filter));
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
+        model.addAttribute("admin", (user.getRoles().contains(Role.ADMIN) ? "ADMIN" : "USER"));
         return "main";
     }
 
     @PostMapping("/main")
     public String add(@AuthenticationPrincipal User user, @RequestParam String text, @RequestParam String tag, Model model) {
         if(text.isEmpty() || tag.isEmpty()) {
-            return main("", model);
+            return main(user, "", model);
         }
         Message message = new Message(text, tag, user);
         messageRepo.save(message);
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
+        model.addAttribute("admin", (user.getRoles().contains(Role.ADMIN) ? "ADMIN" : "USER"));
         return "main";
     }
 }

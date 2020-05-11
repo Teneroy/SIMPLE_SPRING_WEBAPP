@@ -1,7 +1,7 @@
 <#import "parts/common.ftlh" as common>
 
 <@common.page>
-    <@common.header />
+    <@common.header admin />
     <main class="container">
         <h1></h1>
         <section class="row">

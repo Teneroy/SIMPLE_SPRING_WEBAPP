@@ -18,7 +18,7 @@
     </html>
 </#macro>
 
-<#macro header>
+<#macro header admin>
     <header>
         <nav>
             <div class="nav-wrapper container">
@@ -30,6 +30,11 @@
                             <input class="btn" type="submit" value="Sign Out">
                         </form>
                     </li>
+                    <#if admin == "ADMIN">
+                        <li>
+                            <a class="btn" href="/user">Users</a>
+                        </li>
+                    </#if>
                 </ul>
             </div>
         </nav>
