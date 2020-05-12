@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.utils.FileUtils;
 import org.example.domain.Message;
 import org.example.domain.Role;
 import org.example.domain.User;
@@ -49,38 +50,20 @@ public class MainController {
     }
 
     @PostMapping("/main")
-    public String add(@AuthenticationPrincipal User user, @RequestParam String text, @RequestParam String tag, Model model, @RequestParam("file") MultipartFile file) throws IOException {
+    public String add(@AuthenticationPrincipal User user, @RequestParam String text, @RequestParam String tag, Model model, @RequestParam("file") MultipartFile file) {
         if(text.isEmpty() || tag.isEmpty()) {
             return main(user, "", model);
         }
         Message message = new Message(text, tag, user);
         if(file != null) {
-            File uploadDir = new File(uploadPath);
-            boolean mkdirResult = true;
-
-            if(!uploadDir.exists()) {
-                mkdirResult = uploadDir.mkdir();
-            }
-
-            if(mkdirResult)
-            {
-                String uuidFile = UUID.randomUUID().toString();
-                String resultFilename = uuidFile + "." + file.getOriginalFilename();
-                boolean fileUploaded = true;
-                try {
-                    file.transferTo(new File(uploadPath + "/" + resultFilename));
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    fileUploaded = false;
-                }
-                if (fileUploaded)
-                    message.setFilename(resultFilename);
-            }
+            String resultFilename = FileUtils.uploadFile(uploadPath, file);
+            if (!resultFilename.isEmpty())
+                message.setFilename(resultFilename);
         }
         messageRepo.save(message);
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
         model.addAttribute("admin", (user.getRoles().contains(Role.ADMIN) ? "ADMIN" : "USER"));
-        return "main";
+        return "redirect:/main";
     }
 }
