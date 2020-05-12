@@ -6,13 +6,22 @@
         <h1></h1>
         <section class="row">
             <h2></h2>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <input type="text" name="text" class="form-control col s11" id="messageInput" placeholder="Enter your message...">
                     <button class="waves-effect waves-light btn col s1" type="submit"><i class="material-icons">send</i></button>
                 </div>
                 <div class="form-group row">
                     <input type="text" name="tag" class="form-control col s12" id="tagInput" placeholder="Enter your tag...">
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file" name="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload file">
+                    </div>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
             </form>
@@ -36,9 +45,16 @@
                         <p>${message.text}</p>
                     </div>
                     <div class="card-action">
-                        <p>${message.tag}</p>
+                        <div class="chip">
+                            ${message.tag}
+                        </div>
                         <p><i>${message.authorName}</i></p>
                     </div>
+                    <#if message.filename??>
+                        <div class="card-image">
+                            <img src="/img/${message.filename}" alt="">
+                        </div>
+                    </#if>
                 </div>
             </div>
             </#list>
