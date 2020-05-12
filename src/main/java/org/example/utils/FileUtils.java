@@ -12,6 +12,15 @@ public class FileUtils {
     * Method returns String value. If file has been uploaded, method returns filename. Else, empty string.
     * */
     public static String uploadFile(String uploadPath, MultipartFile file) {
+        String fileType = file.getContentType();
+
+        if(fileType == null)
+            return "";
+
+        fileType = fileType.split("/")[0];
+        if (!fileType.equals("image"))
+            return "";
+
         File uploadDir = new File(uploadPath);
         boolean mkdirResult = true;
 
