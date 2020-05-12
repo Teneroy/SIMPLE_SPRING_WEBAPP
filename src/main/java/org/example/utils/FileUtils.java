@@ -3,6 +3,7 @@ package org.example.utils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.UUID;
 
 public class FileUtils {
@@ -19,6 +20,9 @@ public class FileUtils {
 
         fileType = fileType.split("/")[0];
         if (!fileType.equals("image"))
+            return "";
+
+        if (Objects.requireNonNull(file.getOriginalFilename()).isEmpty())
             return "";
 
         File uploadDir = new File(uploadPath);

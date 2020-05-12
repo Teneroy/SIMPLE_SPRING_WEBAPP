@@ -4,6 +4,7 @@
 <@common.page>
     <main class="container">
         <h1>Login</h1>
-        <@log.login "/login" />
+        ${message?ifExists}
+        <@log.login "/login" false />
     </main>
 </@common.page>

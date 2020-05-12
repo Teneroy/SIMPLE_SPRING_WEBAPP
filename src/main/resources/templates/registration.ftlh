@@ -4,7 +4,7 @@
 <@common.page>
     <main class="container">
         <h1>Registration</h1>
-        ${message}
-        <@login.login "/registration" />
+        ${message?ifExists}
+        <@login.login "/registration" true />
     </main>
 </@common.page>
