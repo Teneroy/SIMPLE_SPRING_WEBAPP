@@ -27,22 +27,16 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean addUser(User user) {
-        System.out.println("___1");
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
         if(userFromDb != null) {
             return false;
         }
 
-        System.out.println(user.getUsername());
-        System.out.println(user.getEmail());
-        System.out.println("___2");
-
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
         userRepo.save(user);
-        System.out.println("___3");
 
         if(user.getEmail() != null && !user.getEmail().isEmpty()) {
             String message = String.format(

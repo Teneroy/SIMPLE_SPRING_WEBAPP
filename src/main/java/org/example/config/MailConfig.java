@@ -28,9 +28,6 @@ public class MailConfig {
     @Value("${mail.debug}")
     private String debug;
 
-    @Value("${mail.smtp.starttls.enable}")
-    private String starttls;
-
     @Bean
     public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -44,7 +41,6 @@ public class MailConfig {
 
         properties.setProperty("mail.transport.protocol", protocol);
         properties.setProperty("mail.debug", debug);
-        properties.setProperty("mail.smtp.starttls.enable", starttls);
 
         return mailSender;
     }
