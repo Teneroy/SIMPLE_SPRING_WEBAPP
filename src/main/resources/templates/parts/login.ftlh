@@ -6,8 +6,8 @@
         </div>
         <#if isRegisterForm>
             <div class="form-group">
-                <input id="inputEmail" type="email" name="email" class="form-control validate">
                 <label for="inputEmail">Email</label>
+                <input id="inputEmail" type="email" name="email" class="form-control validate">
             </div>
         </#if>
         <div class="form-group">
