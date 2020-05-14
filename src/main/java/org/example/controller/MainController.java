@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.utils.ControllerUtils;
 import org.example.utils.FileUtils;
 import org.example.domain.Message;
 import org.example.domain.Role;
@@ -10,10 +11,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.Valid;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -44,20 +52,31 @@ public class MainController {
     }
 
     @PostMapping("/main")
-    public String add(@AuthenticationPrincipal User user, @RequestParam String text, @RequestParam String tag, Model model, @RequestParam("file") MultipartFile file) {
-        if(text.isEmpty() || tag.isEmpty()) {
-            return main(user, "", model);
+    public String add(@AuthenticationPrincipal User user, @Valid Message message, BindingResult bindingResult, Model model, @RequestParam("file") MultipartFile file) {
+        message.setAuthor(user);
+
+        if(bindingResult.hasErrors()) {
+            System.out.println("hasErrors");
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            System.out.println(errorsMap.toString());
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("message", message);
+        } else {
+            if(file != null ) {
+                String resultFilename = FileUtils.uploadFile(uploadPath, file);
+                if (!resultFilename.isEmpty())
+                    message.setFilename(resultFilename);
+            }
+
+            model.addAttribute("message", null);
+
+            messageRepo.save(message);
         }
-        Message message = new Message(text, tag, user);
-        if(file != null) {
-            String resultFilename = FileUtils.uploadFile(uploadPath, file);
-            if (!resultFilename.isEmpty())
-                message.setFilename(resultFilename);
-        }
-        messageRepo.save(message);
+
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
         model.addAttribute("admin", (user.getRoles().contains(Role.ADMIN) ? "ADMIN" : "USER"));
-        return "redirect:/main";
+
+        return "main";
     }
 }

@@ -8,11 +8,13 @@
             <h2></h2>
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group row">
-                    <input type="text" name="text" class="form-control col s11" id="messageInput" placeholder="Enter your message...">
+                    <input type="text" name="text" class="form-control col s11 validate ${(textError??)?string('invalid', '')}" value="<#if message??>${message.text}</#if>" id="messageInput" placeholder="Enter your message...">
+                    <span class="helper-text" data-error="${textError!}" data-success="right"></span>
                     <button class="waves-effect waves-light btn col s1" type="submit"><i class="material-icons">send</i></button>
                 </div>
                 <div class="form-group row">
-                    <input type="text" name="tag" class="form-control col s12" id="tagInput" placeholder="Enter your tag...">
+                    <input type="text" name="tag" class="form-control col s12 validate ${(tagError??)?string('invalid', '')}" value="<#if message??>${message.tag}</#if>" id="tagInput" placeholder="Enter your tag...">
+                    <span class="helper-text" data-error="${tagError!}" data-success="right"></span>
                 </div>
                 <div class="file-field input-field">
                     <div class="btn">
