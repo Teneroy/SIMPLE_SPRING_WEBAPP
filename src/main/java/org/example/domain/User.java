@@ -22,9 +22,7 @@ public class User implements UserDetails {
     private String email;
     @NotBlank(message = "Password field can't be empty")
     private String password;
-    @Transient
-    @NotBlank(message = "Password confirmation can't be empty")
-    private String passwordConfirmation;
+
     private boolean active;
 
     private String activationCode;
@@ -115,12 +113,5 @@ public class User implements UserDetails {
         this.activationCode = activationCode;
     }
 
-    public String getPasswordConfirmation() {
-        return passwordConfirmation;
-    }
-
-    public void setPasswordConfirmation(String passwordConfirmation) {
-        this.passwordConfirmation = passwordConfirmation;
-    }
 }
 
