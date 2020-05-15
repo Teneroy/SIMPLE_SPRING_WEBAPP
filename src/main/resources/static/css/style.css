@@ -1,3 +1,116 @@
+body {
+    background: #2b2a29;
+}
+
+h1 {
+    color: #ffffff;
+}
+
+h2 {
+    color: #ffffff;
+}
+
+h5 {
+    color: #ffffff;
+}
+
+nav {
+    background-color: transparent;
+}
+
+form {
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 18px;
+    color: #333;
+}
+
+nav form {
+    padding: 0px;
+    background: transparent;
+    border-radius: 0px;
+}
+
+nav form .btn, nav .btn {
+    background: transparent;
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.14), 0 0 0 0 rgba(0,0,0,0.12), 0 0 0 0 rgba(0,0,0,0.2);
+}
+
+nav .btn:hover {
+    background: transparent;
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.14), 0 0 0 0 rgba(0,0,0,0.12), 0 0 0 0 rgba(0,0,0,0.2);
+    opacity: .75;
+}
+
+.nav-wrapper.container {
+    padding-left: 35px;
+}
+
+main form .last-form-div {
+    margin-bottom: 0px;
+}
+
+main .card {
+    border-radius: 20px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+main .card .card-image img {
+    border-radius: 20px;
+}
+
+body>.main-window>.col {
+    float: right;
+}
+
+body>.main-window>.col>form {
+    margin-bottom: 20px;
+    padding-left: 28px;
+    padding-right: 28px;
+}
+
+body>.main-window>h1 {
+    margin: 0px;
+}
+
+input.valid:not([type]),
+input.valid:not([type]):focus,
+input.valid[type=text]:not(.browser-default),
+input.valid[type=text]:not(.browser-default):focus,
+input.valid[type=password]:not(.browser-default),
+input.valid[type=password]:not(.browser-default):focus,
+input.valid[type=email]:not(.browser-default),
+input.valid[type=email]:not(.browser-default):focus,
+input.valid[type=url]:not(.browser-default),
+input.valid[type=url]:not(.browser-default):focus,
+input.valid[type=time]:not(.browser-default),
+input.valid[type=time]:not(.browser-default):focus,
+input.valid[type=date]:not(.browser-default),
+input.valid[type=date]:not(.browser-default):focus,
+input.valid[type=datetime]:not(.browser-default),
+input.valid[type=datetime]:not(.browser-default):focus,
+input.valid[type=datetime-local]:not(.browser-default),
+input.valid[type=datetime-local]:not(.browser-default):focus,
+input.valid[type=tel]:not(.browser-default),
+input.valid[type=tel]:not(.browser-default):focus,
+input.valid[type=number]:not(.browser-default),
+input.valid[type=number]:not(.browser-default):focus,
+input.valid[type=search]:not(.browser-default),
+input.valid[type=search]:not(.browser-default):focus,
+textarea.materialize-textarea.valid,
+textarea.materialize-textarea.valid:focus,
+.select-wrapper.valid>input.select-dropdown {
+    border-bottom: 1px solid #2aa29f;
+    -webkit-box-shadow: 0 1px 0 0 #2aa29f;
+    box-shadow: 0 1px 0 0 #2aa29f;
+}
+
+input:not([type]).valid ~ .helper-text:after, input:not([type]):focus.valid ~ .helper-text:after, input[type=text]:not(.browser-default).valid ~ .helper-text:after, input[type=text]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=password]:not(.browser-default).valid ~ .helper-text:after, input[type=password]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=email]:not(.browser-default).valid ~ .helper-text:after, input[type=email]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=url]:not(.browser-default).valid ~ .helper-text:after, input[type=url]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=time]:not(.browser-default).valid ~ .helper-text:after, input[type=time]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=date]:not(.browser-default).valid ~ .helper-text:after, input[type=date]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=datetime]:not(.browser-default).valid ~ .helper-text:after, input[type=datetime]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=datetime-local]:not(.browser-default).valid ~ .helper-text:after, input[type=datetime-local]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=tel]:not(.browser-default).valid ~ .helper-text:after, input[type=tel]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=number]:not(.browser-default).valid ~ .helper-text:after, input[type=number]:not(.browser-default):focus.valid ~ .helper-text:after, input[type=search]:not(.browser-default).valid ~ .helper-text:after, input[type=search]:not(.browser-default):focus.valid ~ .helper-text:after, textarea.materialize-textarea.valid ~ .helper-text:after, textarea.materialize-textarea:focus.valid ~ .helper-text:after, .select-wrapper.valid ~ .helper-text:after {
+    content: attr(data-success);
+    color: #2aa29f;
+}
+
 main {
     padding: 20px;
 }
