@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.domain.Role;
 import org.example.domain.User;
 import org.example.service.UserService;
+import org.example.utils.ControllerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
@@ -29,7 +33,9 @@ public class UserController {
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("roles", Role.values());
+        model.addAttribute("roles",
+                Arrays.stream(Role.values()).filter(x -> x != Role.USER).collect(Collectors.toList())
+        );
         return "userEdit";
     }
 
@@ -49,6 +55,7 @@ public class UserController {
     public String getProfile(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
+        model.addAttribute("admin", ControllerUtils.getRole(user));
 
         return "profile";
     }

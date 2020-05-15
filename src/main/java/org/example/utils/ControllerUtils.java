@@ -1,5 +1,7 @@
 package org.example.utils;
 
+import org.example.domain.Role;
+import org.example.domain.User;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -14,5 +16,9 @@ public class ControllerUtils {
                 FieldError::getDefaultMessage
         );
         return bindingResult.getFieldErrors().stream().collect(collector);
+    }
+
+    public static String getRole(User user) {
+        return (user.getRoles().contains(Role.ADMIN) ? "ADMIN" : "USER");
     }
 }

@@ -47,7 +47,7 @@ public class MainController {
         Iterable<Message> messages = (filter.isEmpty() ? messageRepo.findAll() : messageRepo.findByTag(filter));
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
-        model.addAttribute("admin", (user.getRoles().contains(Role.ADMIN) ? "ADMIN" : "USER"));
+        model.addAttribute("admin", ControllerUtils.getRole(user));
         return "main";
     }
 
@@ -75,7 +75,7 @@ public class MainController {
 
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
-        model.addAttribute("admin", (user.getRoles().contains(Role.ADMIN) ? "ADMIN" : "USER"));
+        model.addAttribute("admin", ControllerUtils.getRole(user));
 
         return "main";
     }
