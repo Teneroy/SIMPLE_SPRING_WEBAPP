@@ -23,11 +23,25 @@
                 <input type="password" name="passwordConfirmation" class="form-control validate ${(passwordConfirmationError??)?string('invalid', '')}" id="inputPasswordConfirmation">
                 <span class="helper-text" data-error="${passwordConfirmationError!}" data-success="right"></span>
             </div>
+            <input type="hidden" id="recaptcha_resp" name="g-recaptcha-response" value=""/>
         </#if>
         <input type="hidden" name="_csrf" value="${ _csrf.token}" />
         <button type="submit" class="waves-effect waves-light btn"><#if isRegisterForm>Sign Up<#else>Sing In</#if></button>
         <#if !isRegisterForm>
             <a class="waves-effect waves-light btn registration-redir" href="/registration">Sign Up</a>
         </#if>
+        <#if isRegisterForm && captchaError??>
+            <p class="error">${captchaError}</p>
+        </#if>
     </form>
+    <#if isRegisterForm>
+        <script type="text/javascript">
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6Lcw1fcUAAAAABOtyNQlyzCHKMhkoq4dmkcUrDTl', {action: 'homepage'}).then(function(token) {
+                    console.log(token);
+                    document.getElementById('recaptcha_resp').value = token;
+                });
+            });
+        </script>
+    </#if>
 </#macro>

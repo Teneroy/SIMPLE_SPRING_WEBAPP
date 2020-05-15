@@ -4,7 +4,7 @@
 <@common.page>
     <main class="container">
         <h1>Login</h1>
-        ${message!}
+        <h5>${message!}</h5>
         <#if Session?? && Session.SPRING_SECURITY_LAST_EXCEPTION??>
             Incorrect login data
         </#if>
