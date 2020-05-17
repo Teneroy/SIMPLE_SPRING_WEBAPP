@@ -1,5 +1,6 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
@@ -12,6 +13,9 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class Application {
+    @Value("${hostname.port}")
+    private int applicationPort;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -37,7 +41,7 @@ public class Application {
     private Connector redirectConnector() {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
-        connector.setPort(8080);
+        connector.setPort(applicationPort);
         connector.setSecure(false);
         connector.setRedirectPort(8443);
         return connector;
