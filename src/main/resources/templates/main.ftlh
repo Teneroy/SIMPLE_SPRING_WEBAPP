@@ -47,7 +47,7 @@
                         <div class="chip">
                             ${message.tag}
                         </div>
-                        <p><i>${message.authorName}</i></p>
+                        <p><a href="/user-messages/${message.author.id}"><i>${message.authorName}</i></a></p>
                     </div>
                     <#if message.filename??>
                         <div class="card-image">

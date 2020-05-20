@@ -1,3 +1,5 @@
+<#include "security.ftlh">
+
 <#macro page>
     <!DOCTYPE html>
     <html lang="en">
@@ -36,6 +38,11 @@
                             <a class="btn" href="/user">Users</a>
                         </li>
                     </#if>
+                    <if user??>
+                        <li>
+                            <a class="btn" href="/user-messages/${currentUserId}">My messages</a>
+                        </li>
+                    </if>
                     <li>
                         <a class="btn" href="/user/profile">Profile</a>
                     </li>
