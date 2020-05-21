@@ -114,3 +114,9 @@ input:not([type]).valid ~ .helper-text:after, input:not([type]):focus.valid ~ .h
 main {
     padding: 20px;
 }
+
+a.edit-btn {
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+}

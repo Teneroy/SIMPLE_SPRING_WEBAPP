@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import antlr.StringUtils;
 import org.example.utils.ControllerUtils;
 import org.example.utils.FileUtils;
 import org.example.domain.Message;
@@ -86,14 +87,47 @@ public class MainController {
     public String userMessages(
         @AuthenticationPrincipal User currentUser,
         @PathVariable User user,
-        Model model
+        Model model,
+        @RequestParam(required = false) Message message
     ) {
         Set<Message> messages = user.getMessages();
 
         model.addAttribute("messages", messages);
         model.addAttribute("isCurrentUser", currentUser.equals(user));
         model.addAttribute("admin", ControllerUtils.getRole(user));
+        model.addAttribute("message", message);
 
         return "userMessages";
+    }
+
+    @PostMapping("/user-messages/{user}")
+    public String updateMessage(
+        @AuthenticationPrincipal User currentUser,
+        @PathVariable Long user,
+        @RequestParam("id") Message message,
+        @RequestParam("text") String text,
+        @RequestParam("tag") String tag,
+        @RequestParam("file") MultipartFile file
+    ) {
+        if(!message.getAuthor().equals(currentUser))
+            return "redirect:/user-messages/" + user;
+
+        if(file != null ) {
+            String resultFilename = FileUtils.uploadFile(uploadPath, file);
+            if (!resultFilename.isEmpty())
+                message.setFilename(resultFilename);
+        }
+
+        if(text != null && !text.isEmpty()) {
+            message.setText(text);
+        }
+
+        if(tag != null && !tag.isEmpty()) {
+            message.setTag(tag);
+        }
+
+        messageRepo.save(message);
+
+        return "redirect:/user-messages/" + user;
     }
 }

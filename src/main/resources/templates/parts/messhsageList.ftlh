@@ -11,6 +11,9 @@
                     ${message.tag}
                 </div>
                 <p><i>${message.authorName}</i></p>
+                <#if message.author.id == currentUserId>
+                    <a class="edit-btn" href="/user-messages/${message.author.id}?message=${message.id}"><i class="material-icons">edit</i></a>
+                </#if>
             </div>
             <#if message.filename??>
                 <div class="card-image">

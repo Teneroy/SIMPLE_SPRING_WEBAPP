@@ -1,4 +1,5 @@
 <#import "parts/common.ftlh" as common>
+<#include "parts/security.ftlh">
 
 <@common.page>
     <@common.header admin />
@@ -48,6 +49,9 @@
                             ${message.tag}
                         </div>
                         <p><a href="/user-messages/${message.author.id}"><i>${message.authorName}</i></a></p>
+                        <#if message.author.id == currentUserId>
+                            <a class="edit-btn" href="/user-messages/${message.author.id}?message=${message.id}"><i class="material-icons">edit</i></a>
+                        </#if>
                     </div>
                     <#if message.filename??>
                         <div class="card-image">

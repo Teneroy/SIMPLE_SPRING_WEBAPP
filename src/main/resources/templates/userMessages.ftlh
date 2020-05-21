@@ -1,4 +1,5 @@
 <#import "parts/common.ftlh" as common>
+<#include "parts/security.ftlh">
 
 <@common.page>
     <@common.header admin />
