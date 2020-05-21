@@ -83,55 +83,5 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/user-messages/{user}")
-    public String userMessages(
-        @AuthenticationPrincipal User currentUser,
-        @PathVariable User user,
-        Model model,
-        @RequestParam(required = false) Message message
-    ) {
-        Set<Message> messages = user.getMessages();
 
-        model.addAttribute("userChannel", user);
-        model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
-        model.addAttribute("subscribersCount", user.getSubscribers().size());
-        model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
-        model.addAttribute("messages", messages);
-        model.addAttribute("isCurrentUser", currentUser.equals(user));
-        model.addAttribute("admin", ControllerUtils.getRole(user));
-        model.addAttribute("message", message);
-
-        return "userMessages";
-    }
-
-    @PostMapping("/user-messages/{user}")
-    public String updateMessage(
-        @AuthenticationPrincipal User currentUser,
-        @PathVariable Long user,
-        @RequestParam("id") Message message,
-        @RequestParam("text") String text,
-        @RequestParam("tag") String tag,
-        @RequestParam("file") MultipartFile file
-    ) {
-        if(!message.getAuthor().equals(currentUser))
-            return "redirect:/user-messages/" + user;
-
-        if(file != null ) {
-            String resultFilename = FileUtils.uploadFile(uploadPath, file);
-            if (!resultFilename.isEmpty())
-                message.setFilename(resultFilename);
-        }
-
-        if(text != null && !text.isEmpty()) {
-            message.setText(text);
-        }
-
-        if(tag != null && !tag.isEmpty()) {
-            message.setTag(tag);
-        }
-
-        messageRepo.save(message);
-
-        return "redirect:/user-messages/" + user;
-    }
 }
