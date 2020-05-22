@@ -7,7 +7,7 @@
         <form action="/user" method="post">
             <div class="form-group">
                 <label for="inputLogin">User name</label>
-                <input type="text" name="username" class="form-control" id="inputLogin" value="${user.username}">
+                <input type="text" name="username" class="form-control" id="inputLogin" value="${user.username}" />
             </div>
             <div class="form-group">
             <#list roles as role>
@@ -16,7 +16,7 @@
                 </div>
             </#list>
             </div>
-            <input type="hidden" value="${user.id}" name="userId">
+            <input type="hidden" value="${user.id}" name="userId" />
             <input type="hidden" name="_csrf" value="${ _csrf.token}" />
             <button type="submit" class="waves-effect waves-light btn">Save</button>
         </form>

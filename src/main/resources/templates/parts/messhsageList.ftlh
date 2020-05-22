@@ -17,7 +17,7 @@
             </div>
             <#if message.filename??>
                 <div class="card-image">
-                    <img src="/img/${message.filename}" alt="">
+                    <img src="/img/${message.filename}" alt="" />
                 </div>
             </#if>
         </div>
